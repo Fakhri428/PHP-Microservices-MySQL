@@ -1172,6 +1172,5 @@ Dengan desain ini, setiap service dapat:
 ---
 
 **Dibuat untuk keperluan edukasi Semester 6 - Web Service**
-#   P H P - M i c r o s e r v i c e s - M y S Q L 
- 
- 
+# PHP-Microservices-MySQL
+
