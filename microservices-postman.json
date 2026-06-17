@@ -1,0 +1,686 @@
+{
+  "info": {
+    "_postman_id": "php-microservices-mysql",
+    "name": "PHP Microservices MySQL",
+    "description": "Koleksi endpoint untuk PHP Microservices MySQL dengan API Gateway",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "User Service",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["users"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get All Users Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:8000/users",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8000",
+                  "path": ["users"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"service\": \"User Service\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"name\": \"Budi Santoso\",\n      \"email\": \"budi@example.com\",\n      \"created_at\": \"2026-05-06 10:00:00\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Siti Aminah\",\n      \"email\": \"siti@example.com\",\n      \"created_at\": \"2026-05-06 10:00:00\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get User Detail",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/users/detail?id=1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["users", "detail"],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get User Detail Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:8000/users/detail?id=1",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8000",
+                  "path": ["users", "detail"],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"service\": \"User Service\",\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Budi Santoso\",\n    \"email\": \"budi@example.com\",\n    \"created_at\": \"2026-05-06 10:00:00\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Rina Maharani\",\n  \"email\": \"rina@example.com\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["users"]
+            }
+          },
+          "response": [
+            {
+              "name": "Create User Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Rina Maharani\",\n  \"email\": \"rina@example.com\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:8000/users",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8000",
+                  "path": ["users"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"User berhasil dibuat\",\n  \"data\": {\n    \"id\": 3,\n    \"name\": \"Rina Maharani\",\n    \"email\": \"rina@example.com\"\n  }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Product Service",
+      "item": [
+        {
+          "name": "Get All Products",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/products",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["products"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get All Products Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:8000/products",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8000",
+                  "path": ["products"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"service\": \"Product Service\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"name\": \"Laptop Lenovo ThinkPad\",\n      \"price\": 8500000,\n      \"stock\": 10,\n      \"created_at\": \"2026-05-06 10:00:00\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Mouse Wireless Logitech\",\n      \"price\": 175000,\n      \"stock\": 50,\n      \"created_at\": \"2026-05-06 10:00:00\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Keyboard Mechanical\",\n      \"price\": 450000,\n      \"stock\": 25,\n      \"created_at\": \"2026-05-06 10:00:00\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Product Detail",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/products/detail?id=1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["products", "detail"],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Product Detail Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:8000/products/detail?id=1",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8000",
+                  "path": ["products", "detail"],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"service\": \"Product Service\",\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Laptop Lenovo ThinkPad\",\n    \"price\": 8500000,\n    \"stock\": 10,\n    \"created_at\": \"2026-05-06 10:00:00\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Webcam 4K\",\n  \"price\": 950000,\n  \"stock\": 8\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/products",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["products"]
+            }
+          },
+          "response": [
+            {
+              "name": "Create Product Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Webcam 4K\",\n  \"price\": 950000,\n  \"stock\": 8\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:8000/products",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8000",
+                  "path": ["products"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Produk berhasil dibuat\",\n  \"data\": {\n    \"id\": 4,\n    \"name\": \"Webcam 4K\",\n    \"price\": 950000,\n    \"stock\": 8\n  }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Order Service",
+      "item": [
+        {
+          "name": "Get All Orders",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/orders",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["orders"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get All Orders Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:8000/orders",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8000",
+                  "path": ["orders"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"service\": \"Order Service\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"user_id\": 1,\n      \"product_id\": 1,\n      \"quantity\": 1,\n      \"status\": \"PAID\",\n      \"created_at\": \"2026-05-06 10:00:00\"\n    },\n    {\n      \"id\": 2,\n      \"user_id\": 2,\n      \"product_id\": 3,\n      \"quantity\": 2,\n      \"status\": \"PENDING\",\n      \"created_at\": \"2026-05-06 10:00:00\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Order Detail",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/orders/detail?id=1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["orders", "detail"],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Order Detail Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:8000/orders/detail?id=1",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8000",
+                  "path": ["orders", "detail"],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"service\": \"Order Service\",\n  \"data\": {\n    \"order\": {\n      \"id\": 1,\n      \"user_id\": 1,\n      \"product_id\": 1,\n      \"quantity\": 1,\n      \"status\": \"PAID\",\n      \"created_at\": \"2026-05-06 10:00:00\"\n    },\n    \"user\": {\n      \"id\": 1,\n      \"name\": \"Budi Santoso\",\n      \"email\": \"budi@example.com\",\n      \"created_at\": \"2026-05-06 10:00:00\"\n    },\n    \"product\": {\n      \"id\": 1,\n      \"name\": \"Laptop Lenovo ThinkPad\",\n      \"price\": 8500000,\n      \"stock\": 10,\n      \"created_at\": \"2026-05-06 10:00:00\"\n    }\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": 1,\n  \"product_id\": 1,\n  \"quantity\": 2\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/orders",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["orders"]
+            }
+          },
+          "response": [
+            {
+              "name": "Create Order Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_id\": 1,\n  \"product_id\": 1,\n  \"quantity\": 2\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:8000/orders",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8000",
+                  "path": ["orders"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Order berhasil dibuat\",\n  \"data\": {\n    \"id\": 3,\n    \"user\": {\n      \"id\": 1,\n      \"name\": \"Budi Santoso\",\n      \"email\": \"budi@example.com\",\n      \"created_at\": \"2026-05-06 10:00:00\"\n    },\n    \"product\": {\n      \"id\": 1,\n      \"name\": \"Laptop Lenovo ThinkPad\",\n      \"price\": 8500000,\n      \"stock\": 10,\n      \"created_at\": \"2026-05-06 10:00:00\"\n    },\n    \"quantity\": 2,\n    \"status\": \"PENDING\",\n    \"stock_update\": {\n      \"product_id\": 1,\n      \"old_stock\": 10,\n      \"new_stock\": 8\n    }\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Order Status",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": 1,\n  \"status\": \"PAID\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/orders/update-status",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["orders", "update-status"]
+            }
+          },
+          "response": [
+            {
+              "name": "Update Order Status Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": 1,\n  \"status\": \"PAID\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:8000/orders/update-status",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8000",
+                  "path": ["orders", "update-status"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Status order berhasil diperbarui\",\n  \"data\": {\n    \"order_id\": 1,\n    \"status\": \"PAID\"\n  }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "API Gateway",
+      "item": [
+        {
+          "name": "Get Summary",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/summary",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["summary"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Summary Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:8000/summary",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8000",
+                  "path": ["summary"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"service\": \"API Gateway\",\n  \"summary\": {\n    \"total_users\": 2,\n    \"total_products\": 3,\n    \"total_orders\": 2\n  },\n  \"data\": {\n    \"users\": [\n      {\n        \"id\": 1,\n        \"name\": \"Budi Santoso\",\n        \"email\": \"budi@example.com\",\n        \"created_at\": \"2026-05-06 10:00:00\"\n      },\n      {\n        \"id\": 2,\n        \"name\": \"Siti Aminah\",\n        \"email\": \"siti@example.com\",\n        \"created_at\": \"2026-05-06 10:00:00\"\n      }\n    ],\n    \"products\": [\n      {\n        \"id\": 1,\n        \"name\": \"Laptop Lenovo ThinkPad\",\n        \"price\": 8500000,\n        \"stock\": 10,\n        \"created_at\": \"2026-05-06 10:00:00\"\n      },\n      {\n        \"id\": 2,\n        \"name\": \"Mouse Wireless Logitech\",\n        \"price\": 175000,\n        \"stock\": 50,\n        \"created_at\": \"2026-05-06 10:00:00\"\n      },\n      {\n        \"id\": 3,\n        \"name\": \"Keyboard Mechanical\",\n        \"price\": 450000,\n        \"stock\": 25,\n        \"created_at\": \"2026-05-06 10:00:00\"\n      }\n    ],\n    \"orders\": [\n      {\n        \"id\": 1,\n        \"user_id\": 1,\n        \"product_id\": 1,\n        \"quantity\": 1,\n        \"status\": \"PAID\",\n        \"created_at\": \"2026-05-06 10:00:00\"\n      },\n      {\n        \"id\": 2,\n        \"user_id\": 2,\n        \"product_id\": 3,\n        \"quantity\": 2,\n        \"status\": \"PENDING\",\n        \"created_at\": \"2026-05-06 10:00:00\"\n      }\n    ]\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Service Status",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/status",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["status"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Service Status Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:8000/status",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8000",
+                  "path": ["status"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"service\": \"API Gateway\",\n  \"status\": {\n    \"user_service\": \"running\",\n    \"product_service\": \"running\",\n    \"order_service\": \"running\"\n  }\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
