@@ -1,73 +1,140 @@
 # PHP Microservices MySQL
 
-Proyek ini merupakan contoh praktikum sederhana untuk memahami arsitektur **microservices** menggunakan **PHP Native**, **MySQL**, dan **API Gateway**. Sistem terdiri dari tiga service utama, yaitu User Service, Product Service, dan Order Service. Setiap service menggunakan database sendiri agar prinsip pemisahan tanggung jawab pada microservices dapat terlihat dengan jelas.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PHP Version](https://img.shields.io/badge/PHP-7.4+-blue.svg)](https://www.php.net/)
+[![MySQL Version](https://img.shields.io/badge/MySQL-5.7+-orange.svg)](https://www.mysql.com/)
 
-## Tujuan Praktikum
+Contoh praktikum sederhana untuk memahami arsitektur **microservices** menggunakan **PHP Native**, **MySQL**, dan **API Gateway**. Sistem terdiri dari tiga service utama yang terpisah dengan database tersendiri untuk mendemonstrasikan prinsip pemisahan tanggung jawab pada arsitektur microservices.
 
-Setelah menyelesaikan praktikum ini, mahasiswa diharapkan mampu:
+## 📋 Daftar Isi
 
-1. Memahami konsep dasar microservices.
-2. Membuat beberapa service sederhana menggunakan PHP Native.
-3. Menghubungkan setiap service dengan database MySQL yang berbeda.
-4. Membuat API Gateway sebagai pintu masuk utama client.
-5. Menguji komunikasi antarservice menggunakan browser, Thunder Client, Postman, atau tools sejenis.
+- [Fitur](#fitur)
+- [Teknologi](#teknologi-yang-digunakan)
+- [Arsitektur](#arsitektur-sistem)
+- [Struktur Folder](#struktur-folder)
+- [Quick Start](#quick-start)
+- [Endpoint API](#daftar-endpoint-melalui-api-gateway)
+- [Testing](#skenario-pengujian-praktikum)
 
-## Teknologi yang Digunakan
+## ✨ Fitur
 
-| Teknologi | Fungsi |
-|---|---|
-| PHP Native | Membuat service REST API sederhana |
-| MySQL | Menyimpan data setiap service |
-| XAMPP | Menjalankan PHP dan MySQL secara lokal |
-| PDO | Menghubungkan PHP dengan database MySQL |
-| Thunder Client/Postman | Menguji endpoint API |
+- **User Service** - Manajemen data pengguna
+- **Product Service** - Manajemen data produk dan stok
+- **Order Service** - Manajemen pesanan dengan validasi antar service
+- **API Gateway** - Router terpusat untuk semua request
+- Service-to-Service Communication via HTTP
 
-## Arsitektur Sistem
+## 🎯 Tujuan Pembelajaran
+
+- Memahami konsep dasar arsitektur microservices
+- Membuat service REST API sederhana dengan PHP Native
+- Menghubungkan setiap service dengan database MySQL yang terpisah
+- Membuat API Gateway sebagai router terpusat
+- Menguji komunikasi antar service menggunakan Postman/Thunder Client
+
+## 🛠️ Teknologi yang Digunakan
+
+| Teknologi | Fungsi | Versi |
+|---|---|---|
+| PHP Native | REST API Development | 7.4+ |
+| MySQL | Database Management | 5.7+ |
+| PDO | Database Connection | Built-in |
+| XAMPP | Local Environment | Latest |
+| HTTP Stream | Service Communication | Native |
+
+## 🏗️ Arsitektur Sistem
 
 ```text
-Client
-  |
-  v
-API Gateway : localhost:8000
-  |
-  |-- User Service    : localhost:8001 -> db_user_service
-  |-- Product Service : localhost:8002 -> db_product_service
-  |-- Order Service   : localhost:8003 -> db_order_service
+┌─────────────┐
+│   Client    │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────────────────────┐
+│   API Gateway               │
+│   localhost:8000            │
+└──┬──────────────┬───────────┘
+   │              │
+   ▼              ▼
+┌──────────────┐ ┌──────────────┐ ┌──────────────┐
+│ User Service │ │Product Service│ │ Order Service│
+│ :8001        │ │ :8002        │ │ :8003        │
+│ db_user_*    │ │ db_product_* │ │ db_order_*   │
+└──────────────┘ └──────────────┘ └──────────────┘
 ```
 
-API Gateway menjadi pintu masuk utama bagi client. Client tidak perlu mengakses setiap service secara langsung. Request dari client diterima oleh API Gateway, kemudian diteruskan ke service yang sesuai.
+Setiap service berjalan independen dengan database tersendiri. API Gateway bertindak sebagai router terpusat yang meneruskan request ke service yang sesuai.
 
-## Struktur Folder
-
-Buat folder utama dengan nama `php-microservices-mysql`, kemudian buat struktur folder berikut.
+## 📁 Struktur Folder
 
 ```text
 php-microservices-mysql/
-|
+│
 ├── api-gateway/
-│   └── index.php
-|
+│   └── index.php                 # Router API Gateway
+│
 ├── user-service/
-│   ├── db.php
-│   └── index.php
-|
+│   ├── db.php                    # Database connection
+│   └── index.php                 # User endpoints
+│
 ├── product-service/
-│   ├── db.php
-│   └── index.php
-|
-└── order-service/
-    ├── db.php
-    └── index.php
+│   ├── db.php                    # Database connection
+│   └── index.php                 # Product endpoints
+│
+├── order-service/
+│   ├── db.php                    # Database connection
+│   └── index.php                 # Order endpoints
+│
+├── readme.md                     # Dokumentasi
+└── microservices-postman.json    # Postman collection
 ```
 
-## Penjelasan Struktur Folder
-
-| Folder | Keterangan |
+| Folder | Fungsi |
 |---|---|
-| `api-gateway` | Mengatur request dari client ke service |
-| `user-service` | Mengelola data user |
-| `product-service` | Mengelola data produk |
-| `order-service` | Mengelola data pesanan |
+| `api-gateway` | Router terpusat untuk semua request |
+| `user-service` | Manajemen data pengguna |
+| `product-service` | Manajemen data produk & stok |
+| `order-service` | Manajemen pesanan & validasi |
+
+## 🚀 Quick Start
+
+### Prerequisites
+- PHP 7.4+
+- MySQL 5.7+
+- Git
+
+### Langkah Setup
+
+1. **Setup Database** - Jalankan script SQL di phpMyAdmin:
+```sql
+CREATE DATABASE db_user_service;
+CREATE DATABASE db_product_service;
+CREATE DATABASE db_order_service;
+```
+
+2. **Buat Tabel** - Lihat section [Database Setup](#persiapan-database) untuk script lengkap
+
+3. **Jalankan Service** - Buka 4 terminal:
+```bash
+# Terminal 1
+cd api-gateway && php -S localhost:8000
+
+# Terminal 2
+cd user-service && php -S localhost:8001
+
+# Terminal 3
+cd product-service && php -S localhost:8002
+
+# Terminal 4
+cd order-service && php -S localhost:8003
+```
+
+4. **Test API** - Buka browser atau Postman:
+```
+http://localhost:8000/status
+```
+
+---
 
 ## Persiapan Database
 
@@ -937,202 +1004,71 @@ cd api-gateway
 /Applications/XAMPP/xamppfiles/bin/php -S localhost:8000
 ```
 
-# Menjalankan Semua Service
+# 🔧 Menjalankan Semua Service
 
-Buka empat terminal berbeda. Terminal dapat dibuka melalui tab terminal di VS Code.
+Buka **4 terminal** berbeda dan jalankan perintah berikut:
 
-## Terminal 1: API Gateway
+| Terminal | Service | Command |
+|---|---|---|
+| 1 | API Gateway | `cd api-gateway && php -S localhost:8000` |
+| 2 | User Service | `cd user-service && php -S localhost:8001` |
+| 3 | Product Service | `cd product-service && php -S localhost:8002` |
+| 4 | Order Service | `cd order-service && php -S localhost:8003` |
 
+**Catatan:** Jika `php` tidak ditemukan, gunakan path lengkap dari XAMPP:
 ```bash
-cd api-gateway
+# Windows
+C:\xampp\php\php.exe -S localhost:8000
+
+# macOS
 /Applications/XAMPP/xamppfiles/bin/php -S localhost:8000
 ```
 
-## Terminal 2: User Service
+# 📡 Daftar Endpoint Melalui API Gateway
+
+Base URL: `http://localhost:8000`
+
+## User Endpoints
+
+| Method | Endpoint | Fungsi |
+|---|---|---|
+| `GET` | `/users` | Tampilkan semua user |
+| `GET` | `/users/detail?id=1` | Tampilkan detail user |
+| `POST` | `/users` | Tambah user baru |
+
+## Product Endpoints
+
+| Method | Endpoint | Fungsi |
+|---|---|---|
+| `GET` | `/products` | Tampilkan semua produk |
+| `GET` | `/products/detail?id=1` | Tampilkan detail produk |
+| `POST` | `/products` | Tambah produk baru |
+
+## Order Endpoints
+
+| Method | Endpoint | Fungsi |
+|---|---|---|
+| `GET` | `/orders` | Tampilkan semua order |
+| `GET` | `/orders/detail?id=1` | Tampilkan detail order |
+| `POST` | `/orders` | Buat order baru |
+| `POST` | `/orders/update-status` | Ubah status order |
+
+## Gateway Endpoints
+
+| Method | Endpoint | Fungsi |
+|---|---|---|
+| `GET` | `/status` | Cek status semua service |
+| `GET` | `/summary` | Tampilkan ringkasan data |
+
+# ✅ Skenario Pengujian Praktikum
+
+### 1. Cek Status Service
 
 ```bash
-cd user-service
-/Applications/XAMPP/xamppfiles/bin/php -S localhost:8001
+curl http://localhost:8000/status
 ```
 
-## Terminal 3: Product Service
-
-```bash
-cd product-service
-/Applications/XAMPP/xamppfiles/bin/php -S localhost:8002
-```
-
-## Terminal 4: Order Service
-
-```bash
-cd order-service
-/Applications/XAMPP/xamppfiles/bin/php -S localhost:8003
-```
-
-# Daftar Endpoint Melalui API Gateway
-
-| No | Method | Endpoint | Fungsi |
-|---:|---|---|---|
-| 1 | GET | `http://localhost:8000/users` | Menampilkan semua user |
-| 2 | GET | `http://localhost:8000/users/detail?id=1` | Menampilkan detail user |
-| 3 | POST | `http://localhost:8000/users` | Menambahkan user |
-| 4 | GET | `http://localhost:8000/products` | Menampilkan semua produk |
-| 5 | GET | `http://localhost:8000/products/detail?id=1` | Menampilkan detail produk |
-| 6 | POST | `http://localhost:8000/products` | Menambahkan produk |
-| 7 | GET | `http://localhost:8000/orders` | Menampilkan semua order |
-| 8 | GET | `http://localhost:8000/orders/detail?id=1` | Menampilkan detail order |
-| 9 | POST | `http://localhost:8000/orders` | Membuat order |
-| 10 | POST | `http://localhost:8000/orders/update-status` | Mengubah status order |
-| 11 | GET | `http://localhost:8000/summary` | Menampilkan ringkasan data |
-| 12 | GET | `http://localhost:8000/status` | Mengecek status service |
-
-# Skenario Pengujian Praktikum
-
-## 1. Menampilkan Semua User
-
-```http
-GET http://localhost:8000/users
-```
-
-Contoh hasil yang diharapkan.
-
-```json
-{
-  "service": "User Service",
-  "data": [
-    {
-      "id": 1,
-      "name": "Budi Santoso",
-      "email": "budi@example.com",
-      "created_at": "2026-05-06 10:00:00"
-    }
-  ]
-}
-```
-
-## 2. Menambahkan User
-
-```http
-POST http://localhost:8000/users
-```
-
-Body JSON.
-
-```json
-{
-  "name": "Rina Maharani",
-  "email": "rina@example.com"
-}
-```
-
-Contoh hasil yang diharapkan.
-
-```json
-{
-  "message": "User berhasil dibuat",
-  "data": {
-    "id": 3,
-    "name": "Rina Maharani",
-    "email": "rina@example.com"
-  }
-}
-```
-
-## 3. Menampilkan Semua Produk
-
-```http
-GET http://localhost:8000/products
-```
-
-## 4. Menambahkan Produk
-
-```http
-POST http://localhost:8000/products
-```
-
-Body JSON.
-
-```json
-{
-  "name": "Webcam 4K",
-  "price": 950000,
-  "stock": 8
-}
-```
-
-## 5. Membuat Order
-
-```http
-POST http://localhost:8000/orders
-```
-
-Body JSON.
-
-```json
-{
-  "user_id": 1,
-  "product_id": 1,
-  "quantity": 2
-}
-```
-
-Contoh hasil yang diharapkan.
-
-```json
-{
-  "message": "Order berhasil dibuat",
-  "data": {
-    "id": 3,
-    "user": {
-      "id": 1,
-      "name": "Budi Santoso",
-      "email": "budi@example.com"
-    },
-    "product": {
-      "id": 1,
-      "name": "Laptop Lenovo ThinkPad",
-      "price": 8500000,
-      "stock": 10
-    },
-    "quantity": 2,
-    "status": "PENDING"
-  }
-}
-```
-
-Setelah order dibuat, stok produk harus berkurang.
-
-## 6. Melihat Detail Order
-
-```http
-GET http://localhost:8000/orders/detail?id=1
-```
-
-Hasil yang diharapkan adalah data order, data user, dan data produk.
-
-## 7. Mengubah Status Order
-
-```http
-POST http://localhost:8000/orders/update-status
-```
-
-Body JSON.
-
-```json
-{
-  "order_id": 1,
-  "status": "PAID"
-}
-```
-
-## 8. Mengecek Status Service
-
-```http
-GET http://localhost:8000/status
-```
-
-Contoh hasil yang diharapkan.
-
+**Response yang diharapkan:**
 ```json
 {
   "service": "API Gateway",
@@ -1144,20 +1080,98 @@ Contoh hasil yang diharapkan.
 }
 ```
 
-# Catatan Penting
-
-1. Pastikan MySQL pada XAMPP sudah berjalan sebelum menjalankan service.
-2. Pastikan setiap service berjalan pada port yang berbeda.
-3. Jalankan service melalui path folder masing-masing.
-4. API Gateway harus dijalankan jika pengujian dilakukan melalui `localhost:8000`.
-5. Jika terminal menampilkan pesan `command not found: php`, gunakan path PHP dari XAMPP berikut.
+### 2. Tampilkan Semua User
 
 ```bash
-/Applications/XAMPP/xamppfiles/bin/php
+curl http://localhost:8000/users
 ```
 
-# Kesimpulan
+### 3. Tambah User Baru
 
-Praktikum ini menunjukkan bahwa microservices memisahkan tanggung jawab sistem ke dalam beberapa service kecil. User Service bertanggung jawab terhadap data user. Product Service bertanggung jawab terhadap data produk. Order Service bertanggung jawab terhadap data pesanan. API Gateway bertindak sebagai pintu masuk utama yang meneruskan request client ke service yang sesuai.
-#   P H P - M i c r o s e r v i c e s - M y S Q L  
+```bash
+curl -X POST http://localhost:8000/users \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Rina Maharani","email":"rina@example.com"}'
+```
+
+### 4. Tampilkan Semua Produk
+
+```bash
+curl http://localhost:8000/products
+```
+
+### 5. Tambah Produk Baru
+
+```bash
+curl -X POST http://localhost:8000/products \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Webcam 4K","price":950000,"stock":8}'
+```
+
+### 6. Buat Order
+
+```bash
+curl -X POST http://localhost:8000/orders \
+  -H "Content-Type: application/json" \
+  -d '{"user_id":1,"product_id":1,"quantity":2}'
+```
+
+### 7. Lihat Detail Order
+
+```bash
+curl http://localhost:8000/orders/detail?id=1
+```
+
+### 8. Ubah Status Order
+
+```bash
+curl -X POST http://localhost:8000/orders/update-status \
+  -H "Content-Type: application/json" \
+  -d '{"order_id":1,"status":"PAID"}'
+```
+
+### 9. Lihat Ringkasan Data
+
+```bash
+curl http://localhost:8000/summary
+```
+
+# ⚠️ Catatan Penting
+
+- Pastikan **MySQL** sudah running sebelum menjalankan service
+- Setiap service berjalan pada **port yang berbeda** (8000-8003)
+- Jalankan setiap service dari folder masing-masing
+- API Gateway harus berjalan untuk mengakses semua endpoint
+- Gunakan **Postman** atau **Thunder Client** untuk testing yang lebih mudah
+
+# 📚 Pengetahuan Microservices
+
+Praktikum ini mendemonstrasikan prinsip-prinsip kunci microservices:
+
+✅ **Separation of Concerns** - Setiap service mengelola domain tertentu  
+✅ **Independent Databases** - Setiap service memiliki database sendiri  
+✅ **Service-to-Service Communication** - Komunikasi via HTTP  
+✅ **API Gateway Pattern** - Router terpusat untuk client requests  
+✅ **Loose Coupling** - Service independen dan dapat dikembangkan terpisah  
+
+# 📖 Kesimpulan
+
+Microservices memisahkan sistem besar menjadi service-service kecil yang fokus pada satu tanggung jawab:
+
+- **User Service** → Manajemen user
+- **Product Service** → Manajemen produk  
+- **Order Service** → Manajemen pesanan
+- **API Gateway** → Router dan aggregator
+
+Dengan desain ini, setiap service dapat:
+- Dikembangkan dan deploy secara independen
+- Menggunakan teknologi berbeda
+- Di-scale secara terpisah sesuai kebutuhan
+- Di-test dengan lebih mudah
+
+---
+
+**Dibuat untuk keperluan edukasi Semester 6 - Web Service**
+#   P H P - M i c r o s e r v i c e s - M y S Q L 
+ 
  
